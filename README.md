@@ -1,14 +1,142 @@
-This is a Kotlin Multiplatform project targeting Android, iOS.
+# FUN WITH KMP
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+A cross-platform mobile application built with Kotlin Multiplatform Mobile, featuring shared business logic and platform-specific UI implementations using Compose Multiplatform for iOS and Android.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Demo
+https://github.com/user-attachments/assets/ef09b65d-2ccb-4a6c-9007-82a327742b71
 
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 🌟 Features
+
+- Shared Kotlin code between iOS and Android
+- Compose Multiplatform for cross-platform UI
+- Custom Toast notifications system
+- Animated UI components
+- Dependency injection with Koin
+- Cute Kodee animations 🐨
+
+
+
+## 🏗 Project Structure
+
+```
+├── shared/
+│   ├── commonMain/       # Shared Kotlin code
+│   ├── androidMain/      # Android-specific code
+│   └── iosMain/          # iOS-specific code
+├── androidApp/           # Android application module
+└── iosApp/              # iOS application module
+```
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Android Studio Arctic Fox or newer
+- Xcode 13 or newer
+- JDK 11 or newer
+- Kotlin Multiplatform Mobile plugin
+- CocoaPods
+
+## 📱 Key Components
+
+### Toast Manager
+A cross-platform toast notification system:
+- Android: Uses native Android Toast
+- iOS: Custom implementation using UIKit
+
+```kotlin
+// Usage
+toastManager.showLongToast("Hello from KMM!")
+```
+
+### Animated Components
+Custom animated UI components using Compose Multiplatform:
+- Bouncing buttons
+- Fade animations
+- Kodee jump animations
+
+### Dependency Injection
+Koin setup for dependency management:
+```kotlin
+fun initializeKoin() {
+    startKoin {
+        modules(
+            module {
+                single { ToastManager() }
+                // Add other dependencies
+            }
+        )
+    }
+}
+```
+
+## 🔧 Configuration
+
+### iOS Configuration
+In `MainViewController.kt`:
+```kotlin
+fun MainViewController() = ComposeUIViewController(
+    configure = { initializeKoin() }
+) { App() }
+```
+
+### Android Configuration
+In `MainActivity.kt`:
+```kotlin
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        initializeKoin()
+        setContent {
+            App()
+        }
+    }
+}
+```
+
+## 🌈 UI Components
+
+### Cute Toast Button
+```kotlin
+CuteToastButton(toastManager)
+```
+Features:
+- Animated hearts
+- Bounce effects
+- Smooth color transitions
+
+### Animated Kodee
+```kotlin
+AnimatedKodee(isToastTapped)
+```
+Features:
+- Fade-in/out animations
+- Bouncing effects
+- Smooth transitions
+
+## 📚 Libraries Used
+
+- Kotlin Multiplatform Mobile
+- Compose Multiplatform
+- Koin for dependency injection
+- Kotlin Coroutines
+- Material Design Components
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
+
+## 🙏 Acknowledgments
+
+- Kotlin Multiplatform Mobile team
+- JetBrains for Compose Multiplatform
+- The adorable Kodee mascot 🐨
